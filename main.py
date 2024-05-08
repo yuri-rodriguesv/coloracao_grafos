@@ -80,11 +80,6 @@ def gerar_grafo_sudoku(tabuleiro):
     # Retorna o grafo gerado
     return G
 
-# Função para aplicar o algoritmo de coloração greedy
-def colorir_grafo(G):
-    colors = nx.coloring.greedy_color(G, strategy="largest_first")
-    return colors
-
 # Exemplo de uso:
 ordens_permitidas = [1, 4, 9, 16]
 while True:
@@ -115,23 +110,5 @@ if resolver_sudoku(tabuleiro, linha_inicial, coluna_inicial):
     print("\nSolução:")
     imprimir_tabuleiro_cmd(tabuleiro)
     imprimir_tabuleiro(tabuleiro, tamanho_fonte)
-
-    G = gerar_grafo_sudoku(tabuleiro)
-    cores = colorir_grafo(G)
-
-    # Mapear cores para índices
-    color_map = {
-        'blue': 0,
-        'red': 1,
-        'green': 2,
-        'yellow': 3
-    }
-
-    # Plotar o grafo com as cores
-    plt.figure(figsize=(8, 8))
-    pos = {node: (node[1], -node[0]) for node in G.nodes}  # Posicionamento invertido para melhor visualização
-    nx.draw(G, pos, with_labels=True,
-    node_size=1000, font_size=12, node_color=[cores[node] for node in G.nodes], cmap=plt.cm.get_cmap('tab10', 4))
-    plt.show()
 else:
     print("\nNão há solução para o tabuleiro.")
