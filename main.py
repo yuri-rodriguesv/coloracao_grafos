@@ -1,6 +1,5 @@
 import matplotlib.pyplot as plt
 import seaborn as sns
-import networkx as nx
 
 def eh_valido(tabuleiro, linha, coluna, num):
     # Verifica se o número já está na linha
@@ -57,28 +56,6 @@ def imprimir_tabuleiro(tabuleiro, tamanho_fonte):
 def imprimir_tabuleiro_cmd(tabuleiro):
     for linha in tabuleiro:
         print(" ".join(map(str, linha)))
-
-def gerar_grafo_sudoku(tabuleiro):
-    # Criação do grafo a partir do tabuleiro
-    G = nx.Graph()
-    n = len(tabuleiro)
-
-    # Adiciona todos os vértices do tabuleiro ao grafo
-    for i in range(n):
-        for j in range(n):
-            G.add_node((i, j))
-
-    # Adiciona as arestas horizontais e verticais entre os vértices
-    for i in range(n):
-        for j in range(n):
-            for k in range(n):
-                if k != j:
-                    G.add_edge((i, j), (i, k))
-                if k != i:
-                    G.add_edge((i, j), (k, j))
-
-    # Retorna o grafo gerado
-    return G
 
 # Exemplo de uso:
 ordens_permitidas = [1, 4, 9, 16]
